@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm Kern Javier Rodriguez</h1>
-<h3 align="center">A passionate from sysadmin and developer java</h3>
+<h3 align="center">A passionate from SysAdmin Linux</h3>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=kernjrodrig&label=Profile%20views&color=0e75b6&style=flat" alt="kernjrodrig" /> </p>
 
