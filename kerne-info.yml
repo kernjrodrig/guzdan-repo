@@ -1,0 +1,15 @@
+---
+- name: Actualizar sistemas Red Hat y guardar la salida en un archivo
+  hosts: all
+  become: true
+  tasks:
+    - name: Actualizar todos los paquetes en Red Hat
+      shell: |
+        rpm -q kernel
+        uname -a
+        hostname
+      register: update_output
+    - name: Mostrar resultado
+      debug:
+        msg: |
+          bind: {{ update_output.stdout }}
