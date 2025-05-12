@@ -14,6 +14,6 @@
   tasks:
     - name: Import OneAgent role
       ansible.builtin.import_role:
-        name: oneagent
+        name: dynatrace.oneagent.oneagent
   environment:
     ansible_become: true
