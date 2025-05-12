@@ -1,6 +1,7 @@
 ---
 - name: Deploy Dynatrace OneAgent
   hosts: all
+  become: true
   collections:
     - dynatrace.oneagent
   vars_files:
