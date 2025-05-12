@@ -15,5 +15,3 @@
     - name: Import OneAgent role
       ansible.builtin.import_role:
         name: oneagent
-  environment:
-    ansible_become: true
