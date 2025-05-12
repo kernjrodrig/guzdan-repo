@@ -13,7 +13,7 @@
     oneagent_version: latest
   tasks:
     - name: Import OneAgent role
-      import_role:
+      ansible.builtin.import_role:
         name: oneagent
   environment:
     ansible_become: true
