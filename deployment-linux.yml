@@ -1,7 +1,8 @@
 ---
 - name: Deploy Dynatrace OneAgent
   hosts: all
-  become: true
+  ansible_user: root
+  ansible_become: false
   collections:
     - dynatrace.oneagent
   vars_files:
