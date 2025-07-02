@@ -34,4 +34,4 @@
 
     - name: Display EC2 instance details
       debug:
-        msg: "EC2 instance launched with ID: {{ ec2_instance.instances[0].instance_id }}"
+        msg: ec2_instance
