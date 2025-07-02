@@ -2,7 +2,7 @@
 - name: Create EC2 Instance
   hosts: localhost
   connection: local
-  gather_facts: yes  # Necesario para usar ansible_date_time
+  gather_facts: yes  # Necesario para ansible_date_time
   vars:
     aws_region: "{{ aws_region }}"
     key_pair: "{{ key_pair }}"
@@ -18,20 +18,18 @@
         instance_type: t2.micro
         image_id: "{{ image_id }}"  # Reemplaza con AMI válido
         vpc_subnet_id: "{{ subnet_id }}"
-        security_group_ids:
-          - "{{ security_group_id }}"
+        security_groups: "{{ security_group_id }}"  # Usar security_groups en lugar de security_group_ids
         block_device_mappings:
           - device_name: /dev/xvda
             ebs:
               volume_size: "{{ storage_size }}"
               volume_type: gp3
-        network_interfaces:
-          - associate_public_ip_address: true
-            device_index: 0
+        network:
+          assign_public_ip: yes  # Reemplaza network_interfaces con network
         state: running
         count: 1
         tags:
-          CreatedOn: "{{ ansible_date_time.iso8601 }}"  # Diccionario correcto
+          CreatedOn: "{{ ansible_date_time.iso8601 }}"
       register: ec2_instance
 
     - name: Display EC2 instance details
