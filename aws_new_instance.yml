@@ -1,0 +1,40 @@
+---
+     - name: Create EC2 Instance
+       hosts: localhost
+       connection: local
+       gather_facts: yes  # Habilitar gather_facts para usar la fecha actual
+       vars:
+         aws_region: "{{ aws_region }}"
+         key_pair: "{{ key_pair }}"
+         security_group_id: "{{ security_group_id }}"
+         subnet_id: "{{ subnet_id }}"
+         storage_size: "{{ storage_size }}"
+
+       tasks:
+         - name: Launch EC2 instance
+           amazon.aws.ec2_instance:
+             region: "{{ aws_region }}"
+             key_name: "{{ key_pair }}"
+             instance_type: t2.micro
+             image_id: "{{ image_id }}"  # Reemplaza con AMI válido
+             vpc_subnet_id: "{{ subnet_id }}"
+             security_group_ids:
+               - "{{ security_group_id }}"
+             block_device_mappings:
+               - device_name: /dev/xvda
+                 ebs:
+                   volume_size: "{{ storage_size }}"
+                   volume_type: gp3
+             network_interfaces:
+               - associate_public_ip_address: true
+                 device_index: 0
+             state: running
+             count: 1
+             tags:
+               - key: CreatedOn
+                 value: "{{ ansible_date_time.iso8601 }}"  # Agrega marca de tiempo
+           register: ec2_instance
+
+         - name: Display EC2 instance details
+           debug:
+             msg: "EC2 instance launched with ID: {{ ec2_instance.instances[0].instance_id }}"
